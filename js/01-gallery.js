@@ -32,12 +32,21 @@ function onGalleryImgClick(e) {
   if (!e.target.classList.contains("gallery__image")) {
     return;
   }
-  console.log(e.target.closest(".gallery__item"));
-  const instanceBasicLightbox = basicLightbox.create(
-    e.target.closest(".gallery__item")
-  );
-  instanceBasicLightbox.show();
+  const lightboxEl = createElementForLightbox(e.target);
+  showBasicLightbox(lightboxEl);
+}
 
-  console.log(e.target);
-  console.log(e.currentTarget);
+function createElementForLightbox(el) {
+  const lightboxContainerEl = document.createElement("div");
+  const lightboxImgEl = document.createElement("img");
+  lightboxImgEl.src = el.dataset.source;
+  //  lightboxImgEl.alt = el.getAttribute("alt");
+  lightboxImgEl.alt = el.alt;
+  lightboxContainerEl.appendChild(lightboxImgEl);
+  return lightboxContainerEl;
+}
+
+function showBasicLightbox(el) {
+  const instanceBasicLightbox = basicLightbox.create(el);
+  instanceBasicLightbox.show();
 }
