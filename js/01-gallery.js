@@ -34,6 +34,7 @@ function onGalleryImgClick(e) {
   instanceBasicLightbox.show();
 
   window.addEventListener("keydown", onLightBoxCloseKeyPressEsc);
+
   function onLightBoxCloseKeyPressEsc(e) {
     if (e.code === "Escape") {
       instanceBasicLightbox.close();
@@ -41,6 +42,7 @@ function onGalleryImgClick(e) {
     }
   }
 }
+
 function createElementForLightbox(el) {
   return ` <img
     src = "${el.dataset.source}" 
