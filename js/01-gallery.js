@@ -41,7 +41,7 @@ function createElementForLightbox(el) {
   const lightboxImgEl = document.createElement("img");
   lightboxImgEl.src = el.dataset.source;
   //  lightboxImgEl.alt = el.getAttribute("alt");
-  lightboxImgEl.alt = el.alt;
+  lightboxImgEl.alt = el.alt ? el.alt : "unknown";
   lightboxContainerEl.appendChild(lightboxImgEl);
   return lightboxContainerEl;
 }
