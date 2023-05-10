@@ -2,10 +2,7 @@ import { galleryItems } from "./gallery-items.js";
 
 const galleryListEl = document.querySelector(".gallery");
 
-galleryListEl.insertAdjacentHTML(
-  "afterbegin",
-  createGalleryListMarkup(galleryItems)
-);
+galleryListEl.innerHTML = createGalleryListMarkup(galleryItems);
 
 galleryListEl.addEventListener("click", onGalleryImgClick);
 
@@ -32,21 +29,21 @@ function onGalleryImgClick(e) {
   if (!e.target.classList.contains("gallery__image")) {
     return;
   }
-  const lightboxEl = createElementForLightbox(e.target);
-  showBasicLightbox(lightboxEl);
+  const lightBoxEl = createElementForLightbox(e.target);
+  const instanceBasicLightbox = basicLightbox.create(lightBoxEl);
+  instanceBasicLightbox.show();
+
+  window.addEventListener("keydown", onLightBoxCloseKeyPressEsc);
+  function onLightBoxCloseKeyPressEsc(e) {
+    if (e.code === "Escape") {
+      instanceBasicLightbox.close();
+      window.removeEventListener("keydown", onLightBoxCloseKeyPressEsc);
+    }
+  }
 }
 
 function createElementForLightbox(el) {
-  const lightboxContainerEl = document.createElement("div");
-  const lightboxImgEl = document.createElement("img");
-  lightboxImgEl.src = el.dataset.source;
-  //  lightboxImgEl.alt = el.getAttribute("alt");
-  lightboxImgEl.alt = el.alt ? el.alt : "unknown";
-  lightboxContainerEl.appendChild(lightboxImgEl);
-  return lightboxContainerEl;
-}
-
-function showBasicLightbox(el) {
-  const instanceBasicLightbox = basicLightbox.create(el);
-  instanceBasicLightbox.show();
+  return ` <img
+    src = "${el.dataset.source}" 
+    alt = "${el.alt}">`;
 }
