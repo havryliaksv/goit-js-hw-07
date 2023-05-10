@@ -41,7 +41,6 @@ function onGalleryImgClick(e) {
     }
   }
 }
-
 function createElementForLightbox(el) {
   return ` <img
     src = "${el.dataset.source}" 
