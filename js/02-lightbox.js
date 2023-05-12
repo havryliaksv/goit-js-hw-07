@@ -27,4 +27,3 @@ const simpleLightBoxGallery = new SimpleLightbox(
     captionDelay: 250,
   }
 );
-console.log(simpleLightBoxGallery);
