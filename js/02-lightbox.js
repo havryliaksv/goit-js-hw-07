@@ -4,8 +4,6 @@ const galleryListEl = document.querySelector(".gallery");
 
 galleryListEl.innerHTML = createGalleryListMarkup(galleryItems);
 
-galleryListEl.addEventListener("click", onGalleryImgClick);
-
 function createGalleryListMarkup(galleryItems) {
   return galleryItems
     .map(
@@ -22,18 +20,11 @@ function createGalleryListMarkup(galleryItems) {
     )
     .join("");
 }
-
-function onGalleryImgClick(e) {
-  e.preventDefault();
-  if (!e.target.classList.contains("gallery__image")) {
-    return;
+const simpleLightBoxGallery = new SimpleLightbox(
+  ".gallery .gallery__item .gallery__link",
+  {
+    captionsData: "alt",
+    captionDelay: 250,
   }
-  console.log(e.target);
-  console.log(e.target.closest(".gallery__link"));
-  let simpleLightBoxGallery = new SimpleLightbox(".gallery .gallery__link");
-  console.log(simpleLightBoxGallery.elements);
-  console.log("точка тесту", simpleLightBoxGallery);
-  //simpleLightBoxGallery.on("show.simplelightbox");
-  simpleLightBoxGallery.open(e.target.closest(".gallery__link"));
-  //simpleLightBoxGallery.open();
-}
+);
+console.log(simpleLightBoxGallery);
