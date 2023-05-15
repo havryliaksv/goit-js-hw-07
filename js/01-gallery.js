@@ -30,15 +30,20 @@ function onGalleryImgClick(e) {
     return;
   }
   const lightBoxEl = createElementForLightbox(e.target);
-  const instanceBasicLightbox = basicLightbox.create(lightBoxEl);
+  const instanceBasicLightbox = basicLightbox.create(lightBoxEl, {
+    onShow: () => {
+      window.addEventListener("keydown", onLightBoxCloseKeyEsc);
+    },
+    onClose: () => {
+      window.removeEventListener("keydown", onLightBoxCloseKeyEsc);
+    },
+  });
+
   instanceBasicLightbox.show();
 
-  window.addEventListener("keydown", onLightBoxCloseKeyPressEsc);
-
-  function onLightBoxCloseKeyPressEsc(e) {
+  function onLightBoxCloseKeyEsc(e) {
     if (e.code === "Escape") {
       instanceBasicLightbox.close();
-      window.removeEventListener("keydown", onLightBoxCloseKeyPressEsc);
     }
   }
 }
